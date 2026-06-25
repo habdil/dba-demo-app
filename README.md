@@ -71,7 +71,7 @@ Pastikan sudah terinstall di komputer kamu:
 ### Langkah 1 — Clone / Download Project
 Jika kamu menggunakan Git:
 ```bash
-git clone <url-repo>
+git clone https://github.com/habdil/dba-demo-app.git
 cd dba-demo-app
 ```
 
