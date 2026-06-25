@@ -1,0 +1,667 @@
+/* style.css - Styling untuk DBA Demo App */
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  background: #f2f2f2;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11.5px;
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: #444;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 14px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.subtitle {
+  font-size: 11.5px;
+  color: #999;
+  margin-top: 1px;
+}
+
+/* Status koneksi database */
+.db-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid #e5e5e5;
+  white-space: nowrap;
+  color: #555;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #aaa;
+  flex-shrink: 0;
+}
+
+.db-status.connected .status-dot { background: #22c55e; }
+.db-status.error .status-dot     { background: #ef4444; }
+.db-status.checking .status-dot  { background: #f59e0b; animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ============================================================
+   LAYOUT UTAMA
+   ============================================================ */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 24px;
+  position: relative;
+}
+
+/* Nomor section kecil di sudut kanan atas */
+.card-label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ddd;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', monospace;
+}
+
+.card h2 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.section-desc {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 18px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-header .section-desc {
+  margin-bottom: 0;
+}
+
+/* Badge count (jumlah user / jumlah query) */
+.count-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #888;
+  background: #f3f3f3;
+  border: 1px solid #e8e8e8;
+  padding: 1px 8px;
+  border-radius: 99px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0;
+}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #1a1a1a;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+.form-msg {
+  font-size: 12px;
+  min-height: 18px;
+}
+
+.form-msg.success { color: #16a34a; }
+.form-msg.error   { color: #dc2626; }
+
+/* ============================================================
+   TOMBOL
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+.btn-primary:hover { background: #333; border-color: #333; }
+
+.btn-outline {
+  background: #fff;
+  color: #444;
+  border-color: #ddd;
+}
+.btn-outline:hover { background: #f7f7f7; border-color: #ccc; }
+
+.btn-danger {
+  background: #dc2626;
+  color: #fff;
+  border-color: #dc2626;
+}
+.btn-danger:hover { background: #b91c1c; border-color: #b91c1c; }
+
+.btn-ghost {
+  background: transparent;
+  color: #666;
+  border-color: transparent;
+  padding: 5px 8px;
+}
+.btn-ghost:hover { background: #f3f3f3; color: #333; }
+
+.btn-ghost-danger {
+  background: transparent;
+  color: #dc2626;
+  border-color: transparent;
+  padding: 5px 8px;
+}
+.btn-ghost-danger:hover { background: #fef2f2; }
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ============================================================
+   TABEL DATA USER
+   ============================================================ */
+
+/* Search bar di atas tabel */
+.table-search-bar {
+  margin: 14px 0 0;
+}
+
+.table-search-bar input {
+  width: 100%;
+  max-width: 340px;
+  font-size: 12.5px;
+  padding: 7px 10px;
+  background: #fafafa;
+}
+
+.filter-info {
+  font-size: 11.5px;
+  color: #aaa;
+  margin-top: 8px;
+  min-height: 16px;
+}
+
+/* Table wrapper dengan max-height dan sticky header */
+.table-wrapper {
+  margin-top: 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;        /* untuk border-radius */
+  max-height: 380px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* Scrollbar tabel */
+.table-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.table-wrapper::-webkit-scrollbar-track { background: #f5f5f5; }
+.table-wrapper::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 99px; }
+.table-wrapper::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+/* Sticky header */
+thead th {
+  background: #f7f7f7;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11.5px;
+  color: #777;
+  border-bottom: 1px solid #e8e8e8;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Lebar kolom */
+.col-id       { width: 52px; }
+.col-username { width: 160px; }
+.col-email    { }
+.col-date     { width: 160px; }
+.col-actions  { width: 110px; text-align: center; }
+
+tbody tr {
+  border-bottom: 1px solid #f3f3f3;
+  transition: background 0.1s;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #fafafa; }
+
+tbody td {
+  padding: 10px 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.td-id {
+  font-size: 12px;
+  color: #bbb;
+  font-family: 'Courier New', monospace;
+}
+
+.td-username {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.td-email {
+  color: #555;
+  font-size: 12.5px;
+}
+
+.td-date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.td-actions {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: #ccc;
+  padding: 40px !important;
+  font-size: 13px;
+}
+
+/* ============================================================
+   DBA PANEL
+   ============================================================ */
+.dba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.dba-box {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.dba-box-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.dba-box-header h3 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dba-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dba-badge.grant  { background: #dcfce7; color: #15803d; }
+.dba-badge.revoke { background: #fee2e2; color: #b91c1c; }
+
+.dba-desc {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.dba-box .form-group { margin-bottom: 12px; }
+.dba-box .form-row-2 { margin-bottom: 14px; }
+
+/* ============================================================
+   QUERY LOG
+   ============================================================ */
+.query-log-wrapper {
+  position: relative;
+  margin-top: 14px;
+}
+
+/* Gradient hint di bawah kalau ada konten terpotong */
+.query-log-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 8px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.95));
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.query-log-wrapper.has-overflow::after { opacity: 1; }
+
+#query-log {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 440px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scroll-behavior: smooth;
+}
+
+#query-log::-webkit-scrollbar       { width: 5px; }
+#query-log::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 99px; }
+#query-log::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 99px; }
+#query-log::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+.log-placeholder {
+  font-size: 12px;
+  color: #ccc;
+  text-align: center;
+  padding: 32px 0;
+}
+
+.log-entry {
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  font-size: 12px;
+  /* Tidak ada overflow di sini — biarkan children menentukan tampilannya */
+}
+
+.log-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #fafafa;
+  border-bottom: 1px solid #ebebeb;
+  border-radius: 8px 8px 0 0;
+}
+
+.log-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.log-badge.SELECT { background: #dbeafe; color: #1d4ed8; }
+.log-badge.INSERT { background: #dcfce7; color: #15803d; }
+.log-badge.UPDATE { background: #fef9c3; color: #854d0e; }
+.log-badge.DELETE { background: #fee2e2; color: #b91c1c; }
+.log-badge.GRANT  { background: #f3e8ff; color: #6b21a8; }
+.log-badge.REVOKE { background: #ffedd5; color: #9a3412; }
+.log-badge.OTHER  { background: #f3f4f6; color: #374151; }
+
+.log-time {
+  font-size: 11px;
+  color: #ccc;
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: 'Courier New', monospace;
+}
+
+.log-message {
+  padding: 7px 12px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #fff;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+/* SQL block — tidak ada overflow tersarang */
+.log-sql-wrapper {
+  /* kosong — hanya sebagai pembungkus struktur */
+}
+
+.log-sql-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 12px;
+  background: #262626;
+}
+
+.log-sql-toolbar-label {
+  font-size: 10px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.log-copy-btn {
+  font-size: 10px;
+  color: #777;
+  background: none;
+  border: 1px solid #444;
+  border-radius: 3px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
+}
+.log-copy-btn:hover  { color: #bbb; border-color: #666; }
+.log-copy-btn.copied { color: #4ade80; border-color: #4ade80; }
+
+pre.log-sql {
+  margin: 0;              /* hapus default margin <pre> dari browser */
+  padding: 12px 14px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  white-space: pre-wrap;  /* wrap panjang query */
+  word-break: break-word;
+  display: block;         /* pastikan block-level */
+  border-radius: 0 0 8px 8px; /* rounded bawah mengikuti .log-entry */
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 16px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.modal h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.modal-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 18px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 700px) {
+  main           { padding: 12px; gap: 12px; }
+  header         { padding: 12px 16px; }
+  .dba-grid      { grid-template-columns: 1fr; }
+  .form-row      { grid-template-columns: 1fr; }
+  .table-wrapper { max-height: 300px; }
+}
